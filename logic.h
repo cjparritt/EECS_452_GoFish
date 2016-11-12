@@ -20,7 +20,13 @@ functions, required includes, and predefined varables.
 #ifndef LOGIC_H
 #define LOGIC_H
 
-#include <stdio.h>
+#include <iostream>
+#include <iomanip>
+#include <ctime>
+#include <cstdlib>
+
+using namespace std;
+
 
 int score_P1 = 0; //This is the computer.
 int score_P2 = 0;
@@ -34,7 +40,7 @@ int books_made = 0;
 
 int whos_turn = 0;
 
-int cards[13] = {0};
+int cards[4][13] = {0};
 //rows represent suit and columns represent rank.
 
 int isGameOver(int books_made);
@@ -52,11 +58,12 @@ E: increments books_made and the correct playes score by 1 and sets
    card array rank position to booked.
 */
 
-int do_i_have(int rank);
+int do_i_have(int rank,int player_num);
 /*
-R: rank of cards asked for
+R: rank of cards asked for and who asked
 M: cards array
-E: Checks to see if the computer has a card asked for and returns 1 if true. 
+E: Checks to see if the computer has a card asked for and returns 1 if true.
+   Alters card array based on if true and AI level. 
 */
 
 
@@ -75,10 +82,17 @@ M: cards array
 E: askes for a card based on the card array
 */
 
-void game_init(int card_1_rank,int card_2_rank,int card_3_rank,int card_4_rank,
-	int card_5_rank,int ai_level);
+void other_players_turn();
 /*
-R: the five cards drawn and the level the AI should be set to
+R: N/A
+M: cards array books made whos turn
+E: gathers data from operator during other players turns
+*/
+
+void game_init(int card_1_rank,int card_2_rank,int card_3_rank,int card_4_rank,
+	int card_5_rank);
+/*
+R: the five cards drawn
 M: card array and AI level
 E: preps the game for play
 */

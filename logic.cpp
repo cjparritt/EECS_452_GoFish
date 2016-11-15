@@ -172,19 +172,22 @@ void do_you_have()
 		}
 
 	}
+
 	if(how_smart_am_i == 2)//Normal
 	{
 		temp_smart://temp
 		int target = 0;
+		int check = 0;
 		int player_target = 0;
 		int block_arr[13] = {0};
 		int misses = 0;
 		find_target_n:
 		for (int i = 0; i < 13; ++i)
 		{
-			if(target < cards[1][i])
+			if(check < cards[1][i])
 				{
-					target = cards[1][i];
+					check = cards[1][i];
+					target = i;
 				}
 		}
 		for (int i = 1; i < 3; ++i)
@@ -254,7 +257,7 @@ void do_you_have()
 		{
 			if(go_fish() == 1)
 			{
-				goto find_target_n;
+				goto find_target_n; // check for book go fish.
 			}
 			else
 			{
@@ -271,7 +274,7 @@ void do_you_have()
 	{
 		goto temp_smart; // need to figure out a smart AI
 	}
-	cout << "invalid AI level exiting \n";
+	cout << "invalid AI level exiting \n"; //add endline
 	exit(1);
 }
 
@@ -316,55 +319,55 @@ void  other_players_turn() //Assuming we will not provide wrong data
 	{
 		rank = 0;
 	}
-	if(input == 'j' || input == "J")
+	else if(input == 'j' || input == "J")
 	{
 		rank = 10;
 	}
-	if(input == 'q' || input == "Q")
+	else if(input == 'q' || input == "Q")
 	{
 		rank = 11;
 	}
-	if(input == 'k' || input == "K")
+	else if(input == 'k' || input == "K")
 	{
 		rank = 12;
 	}
-	if(input == '0')
+	else if(input == '0')
 	{
 		rank = 9;
 	}
-	if(input == '1')
+	else if(input == '1')
 	{
 		rank = 0;
 	}
-	if(input == '2')
+	else if(input == '2')
 	{
 		rank = 1;
 	}
-	if(input == '3')
+	else if(input == '3')
 	{
 		rank = 2;
 	}
-	if(input == '4')
+	else if(input == '4')
 	{
 		rank = 3;
 	}
-	if(input == '5')
+	else if(input == '5')
 	{
 		rank = 4;
 	}
-	if(input == '6')
+	else if(input == '6')
 	{
 		rank = 5;
 	}
-	if(input == '7')
+	else if(input == '7')
 	{
 		rank = 6;
 	}
-	if(input == '8')
+	else if(input == '8')
 	{
 		rank = 7;
 	}
-	if(input == '9')
+	else if(input == '9')
 	{
 		rank = 8;
 	}

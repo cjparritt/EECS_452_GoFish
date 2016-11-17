@@ -99,9 +99,10 @@ int go_fish(int rank, int drawn_card)
 
 }
 
-void do_you_have()
+void do_you_have(bool manual)
 {
-	char answer = 0;
+	int draw = 0;
+	char input = '';
 	if(how_smart_am_i == 1)//DUMB !! may ask same question
 	{
 		guess_card:
@@ -156,7 +157,8 @@ void do_you_have()
 		}
 		else if(answer == 78 || answer == 110)
 		{
-			if(go_fish() == 1)
+
+			if(go_fish(guess, drawn_card) == 1)
 			{
 				goto guess_card;
 			}
@@ -203,6 +205,12 @@ void do_you_have()
 			++misses
 			if(misses == 13)//no information about other players
 			{
+				guess_card_n:
+				target = srand(rand(srand(rand(777)))) % 13;
+				if (cards[1][target] < 1)
+				{
+					goto guess_card_n;/* make sure its valid */
+				}
 				reroll_n:
 				int player_target = srand(rand(srand(rand(404)))) % 4 + 1;
 				if(player_target == 1)
@@ -255,14 +263,19 @@ void do_you_have()
 		}
 		else if(answer == 78 || answer == 110)
 		{
-			if(go_fish() == 1)
+			if (man_switch == true)
 			{
-				goto find_target_n; // check for book go fish.
+				cin >> input;
+				draw = input;
 			}
-			else
-			{
-				return;
-			}
+				if(go_fish(target,draw) == 1)
+				{
+					goto find_target_n; // check for book go fish.
+				}
+				else
+				{
+					return;
+				}
 		} 
 		else
 		{
@@ -274,7 +287,7 @@ void do_you_have()
 	{
 		goto temp_smart; // need to figure out a smart AI
 	}
-	cout << "invalid AI level exiting \n"; //add endline
+	cout << "invalid AI level exiting" << endl; //add endline
 	exit(1);
 }
 
@@ -304,6 +317,8 @@ void game_init(int card_1_rank,int card_2_rank,int card_3_rank,int card_4_rank,
 			goto ai_set;
 		}
 		how_smart_am_i = ai_level;
+		whos_turn = 1;
+		return;
 	}
 
 void  other_players_turn() //Assuming we will not provide wrong data

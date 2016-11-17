@@ -24,9 +24,9 @@ functions, required includes, and predefined varables.
 #include <iomanip>
 #include <ctime>
 #include <cstdlib>
+#include <cmath>
 
 using namespace std;
-
 
 int score_P1 = 0; //This is the computer.
 int score_P2 = 0;
@@ -58,7 +58,7 @@ E: increments books_made and the correct playes score by 1 and sets
    card array rank position to booked.
 */
 
-int do_i_have(int rank,int player_num);
+int do_i_have(int rank,int player_num, bool manual);
 /*
 R: rank of cards asked for and who asked
 M: cards array
@@ -95,6 +95,13 @@ void game_init(int card_1_rank,int card_2_rank,int card_3_rank,int card_4_rank,
 R: the five cards drawn
 M: card array and AI level
 E: preps the game for play
+*/
+
+void score_screen();
+/*
+R: N/A
+M: N/A
+E: Displays the winner(s)
 */
 
 #endif

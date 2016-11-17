@@ -468,4 +468,14 @@ void  other_players_turn() //Assuming we will not provide wrong data
 			cout << "invalid answer\n";
 			goto q3;
 		}
+<<<<<<< HEAD
+=======
+
+	}
+}
+
+void score_screen()
+{
+
+>>>>>>> origin/master
 }

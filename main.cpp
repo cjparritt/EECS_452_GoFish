@@ -23,43 +23,69 @@ hand and to be asked for cards.
 #include <iostream>
 #include <iomanip>
 
+bool man_switch = false;
+
 int main()
 {
 	int loop_end = 0;
 	char input = '';
 	int init_card[5] = {0};
 	int scan_card = 0;
-	bool man_switch = false;
+	int starter = 0;
 
-	start:
-	while (loop_end == 0)
-	{
-		choice:
+	choice:
 		cout << "Do you want to play in manual mode or camera mode?\n";
-		cout << "Please input M or m for manual and C or c for camera.\n";
+		cout << "Please input M or m for manual and C or c for camera\n"; //TODO: Add period.
 		cin >> input;
 		if(input == 77 || input == 109)//Manual
 		{
 			for(int i = 1; i < 6; ++i)
 			{
-				cout << "Input card "<< i << " rank.\n"; // asuming we put in only right inputs
+				cout << "Input card "<< i << " rank\n"; // asuming we put in only right inputs TODO: add period
 				cin >> input;
 				init_card[i-1] = atoi(input);
 			}
+			cout << "Input AI level (1-3)\n" //TODO: remove AI query here. It is duplicated in game_init
+			cin >> input;
+			ai_level = atoi(input);
 			man_switch = true;
+			game_init(init_card[0],init_card[1],init_card[2],init_card[3],init_card[4]);
+			if(starter == 4)
+			{
+				starter = 0;
+				whos_turn += starter;
+			}
+			else
+			{
+				whos_turn += starter
+				starter++;
+			}
 			goto play;			
 		}
 		else if(input == 67 || input == 99)//Camera
 		{
 			//TODO: Need to add cam stuff
+			
 		}
 		else
 		{
-				cout << "Invalid input!\n";
+				cout << "invalid input\n";
 				goto choice;
 		}
-		play://TODO: Need to add functions
-		game_init(init_card[0],init_card[1],init_card[2],init_card[3],init_card[4]);
+	
+	while (loop_end == 0)
+	{
+		play://Need to add functions
+		if (whos_turn == 0)
+		{
+			do_you_have(man_switch);
+			if(isGameOver() == 1)
+			{
+				score_screen();
+				
+			}
+		}
+
 
 	}
 	again:
@@ -73,7 +99,7 @@ int main()
 		scan_card = 0;
 		ai_level = 0;
 		man_switch = false;
-		goto start;
+		goto choice;
 	}
 	else if(input == 78 || input == 110)
 	{

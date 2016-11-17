@@ -27,6 +27,8 @@ int isGameOver(int books_made)
 	{
 		return 1;
 	}
+	else if (books_made > 13)
+		cerr << "Error! Too many books have been made!";
 	else
 	{
 		return 0;
@@ -135,16 +137,17 @@ void do_you_have(bool manual)
 		}
 		else
 		{
-			cout << "Player " << player_guess << "do you have any "<< guess << "s?\n";
+			cout << "Player " << player_guess << "do you have any "<< guess+1 << "s?\n";
 		}
 		answer_d:
 		cin >> answer;//Y or y yes n or N no
 		if(answer == 89 || answer == 121)
 		{
 			int amount = 0;
+			cout << "How many?";
 			cin >> amount;
 			cards[1][guess] += amount;
-			cards[player_guess][guess] = 0;
+			cards[player_guess-1][guess] = 0;
 			if (cards[1][guess] == 4)
 			{
 				 book_made(1, guess);
@@ -192,11 +195,14 @@ void do_you_have(bool manual)
 					target = i;
 				}
 		}
-		for (int i = 1; i < 3; ++i)
+		for (j = 1; j < 3; ++j)
 		{
-			if(player_target < cards[i][target])
+			for (int i = 1; i < 4; ++i)
 			{
-				player_target = i;
+				if(j < cards[i][target])
+				{
+					player_target = i;
+				}
 			}
 		}
 		if (player_target == 0)
@@ -468,14 +474,11 @@ void  other_players_turn() //Assuming we will not provide wrong data
 			cout << "invalid answer\n";
 			goto q3;
 		}
-<<<<<<< HEAD
-=======
-
 	}
 }
 
 void score_screen()
 {
 
->>>>>>> origin/master
+
 }

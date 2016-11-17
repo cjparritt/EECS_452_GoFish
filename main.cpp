@@ -35,7 +35,7 @@ int main()
 
 	choice:
 		cout << "Do you want to play in manual mode or camera mode?\n";
-		cout << "Please input M or m for manual and C or c for camera\n"; //TODO: Add period.
+		cout << "Please input M or m for manual and C or c for camera.\n";
 		cin >> input;
 		if(input == 77 || input == 109)//Manual
 		{
@@ -45,9 +45,6 @@ int main()
 				cin >> input;
 				init_card[i-1] = atoi(input);
 			}
-			cout << "Input AI level (1-3)\n" //TODO: remove AI query here. It is duplicated in game_init
-			cin >> input;
-			ai_level = atoi(input);
 			man_switch = true;
 			game_init(init_card[0],init_card[1],init_card[2],init_card[3],init_card[4]);
 			if(starter == 4)
@@ -75,7 +72,7 @@ int main()
 	
 	while (loop_end == 0)
 	{
-		play://Need to add functions
+		play://TODO:Need to add functions
 		if (whos_turn == 0)
 		{
 			do_you_have(man_switch);
@@ -89,7 +86,7 @@ int main()
 
 	}
 	again:
-	cout << "Do you want to play again?\n"; //TODO: Add Y or N query
+	cout << "Do you want to play again? Type Y or N.\n";
 	cin >> input;//Y or y yes n or N no
 	if(input == 89 || input == 121)
 	{
@@ -108,7 +105,7 @@ int main()
 	}
 	else
 		{
-			cout << "invalid input\n";
+			cout << "Invalid input!\n";
 			goto again;
 		}
 }

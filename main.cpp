@@ -29,7 +29,6 @@ int main()
 	char input = '';
 	int init_card[5] = {0};
 	int scan_card = 0;
-	int ai_level = 0;
 	bool man_switch = false;
 
 	start:
@@ -37,34 +36,30 @@ int main()
 	{
 		choice:
 		cout << "Do you want to play in manual mode or camera mode?\n";
-		cout << "Please input M or m for manual and C or c for camera\n"; //TODO: Add period.
+		cout << "Please input M or m for manual and C or c for camera.\n";
 		cin >> input;
 		if(input == 77 || input == 109)//Manual
 		{
 			for(int i = 1; i < 6; ++i)
 			{
-				cout << "Input card "<< i << " rank\n"; // asuming we put in only right inputs TODO: add period
+				cout << "Input card "<< i << " rank.\n"; // asuming we put in only right inputs
 				cin >> input;
 				init_card[i-1] = atoi(input);
 			}
-			cout << "Input AI level (1-3)\n" //TODO: remove AI query here. It is duplicated in game_init
-			cin >> input;
-			ai_level = atoi(input);
 			man_switch = true;
 			goto play;			
 		}
 		else if(input == 67 || input == 99)//Camera
 		{
 			//TODO: Need to add cam stuff
-			
 		}
 		else
 		{
-				cout << "invalid input\n";
+				cout << "Invalid input!\n";
 				goto choice;
 		}
-		play://Need to add functions
-		game_init(init_card[0],init_card[1],init_card[2],init_card[3],init_card[4],ai_level);
+		play://TODO: Need to add functions
+		game_init(init_card[0],init_card[1],init_card[2],init_card[3],init_card[4]);
 
 	}
 	again:

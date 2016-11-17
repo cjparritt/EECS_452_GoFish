@@ -23,19 +23,17 @@ hand and to be asked for cards.
 #include <iostream>
 #include <iomanip>
 
+bool man_switch = false;
+
 int main()
 {
 	int loop_end = 0;
 	char input = '';
 	int init_card[5] = {0};
 	int scan_card = 0;
-	int ai_level = 0;
-	bool man_switch = false;
+	int starter = 0;
 
-	start:
-	while (loop_end == 0)
-	{
-		choice:
+	choice:
 		cout << "Do you want to play in manual mode or camera mode?\n";
 		cout << "Please input M or m for manual and C or c for camera\n"; //TODO: Add period.
 		cin >> input;
@@ -51,6 +49,17 @@ int main()
 			cin >> input;
 			ai_level = atoi(input);
 			man_switch = true;
+			game_init(init_card[0],init_card[1],init_card[2],init_card[3],init_card[4]);
+			if(starter == 4)
+			{
+				starter = 0;
+				whos_turn += starter;
+			}
+			else
+			{
+				whos_turn += starter
+				starter++;
+			}
 			goto play;			
 		}
 		else if(input == 67 || input == 99)//Camera
@@ -63,8 +72,20 @@ int main()
 				cout << "invalid input\n";
 				goto choice;
 		}
+	
+	while (loop_end == 0)
+	{
 		play://Need to add functions
-		game_init(init_card[0],init_card[1],init_card[2],init_card[3],init_card[4],ai_level);
+		if (whos_turn == 0)
+		{
+			do_you_have(man_switch);
+			if(isGameOver() == 1)
+			{
+				score_screen();
+				
+			}
+		}
+
 
 	}
 	again:
@@ -78,7 +99,7 @@ int main()
 		scan_card = 0;
 		ai_level = 0;
 		man_switch = false;
-		goto start;
+		goto choice;
 	}
 	else if(input == 78 || input == 110)
 	{

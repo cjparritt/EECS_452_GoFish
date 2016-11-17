@@ -42,19 +42,19 @@ void book_made(int player_num, rank)
 	}
 	if (player_num = 1)
 	{
-		++score_P1;
+		++scores[0];
 	}
 	if (player_num = 2)
 	{
-		++score_P2;
+		++scores[1];
 	}
 	if (player_num = 3)
 	{
-		++score_P3;
+		++scores[2];
 	}
 	if (player_num = 4)
 	{
-		++score_P4;
+		++scores[3];
 	}
 }
 
@@ -468,14 +468,28 @@ void  other_players_turn() //Assuming we will not provide wrong data
 			cout << "invalid answer\n";
 			goto q3;
 		}
-<<<<<<< HEAD
-=======
+
 
 	}
 }
 
 void score_screen()
 {
-
->>>>>>> origin/master
+	int highest = 0;
+	int winner[4] = {0,0,0,0};
+	for (int i = 0; i < 4; ++i)
+	{
+		if (scores[i] >= highest)
+		{
+			winner[i] = 1;
+			highest = scores[i];
+		}
+	}
+	for (int i = 0; i < count; ++i)
+	{
+		if(winner[i] == 1)
+		{
+			cout << "Player" << (i+1) << " wins\n";
+		}
+	}
 }

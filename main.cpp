@@ -79,11 +79,20 @@ int main()
 			if(isGameOver() == 1)
 			{
 				score_screen();
-				
+				loop_end = 1;
 			}
 		}
-
-
+		else
+		{
+			other_players_turn();
+			if(isGameOver()==1)
+			{
+				score_screen();
+				loop_end = 1;
+			}
+		}
+		if (whos_turn == 4)
+			whos_turn = 0;
 	}
 	again:
 	cout << "Do you want to play again? Type Y or N.\n";

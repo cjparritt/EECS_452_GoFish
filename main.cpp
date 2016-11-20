@@ -24,6 +24,7 @@ hand and to be asked for cards.
 #include <iomanip>
 
 bool man_switch = false;
+int whos_turn = 0;
 
 int main()
 {
@@ -61,7 +62,7 @@ int main()
 		}
 		else if(input == 67 || input == 99)//Camera
 		{
-			//TODO: Need to add cam stuff
+			//TODO: Need to add cam init stuff 
 			
 		}
 		else
@@ -72,18 +73,30 @@ int main()
 	
 	while (loop_end == 0)
 	{
-		play://TODO:Need to add functions
+		play:
+		cout << "It is player" << whos_turn << "'s turn.\n";
 		if (whos_turn == 0)
 		{
-			do_you_have(man_switch);
+			do_you_have(man_switch,1); // 1 is a placeholder for cam fun
 			if(isGameOver() == 1)
 			{
 				score_screen();
-				
+				++loop_end;
 			}
 		}
-
-
+		else
+		{
+			other_players_turn(man_switch,1); //1 is placeholder for cam fun
+			if(isGameOver() == 1)
+			{
+				score_screen();
+				++loop_end;
+			}
+		}
+		if(whos_turn >= 4)
+		{
+			whos_turn = 0;
+		}
 	}
 	again:
 	cout << "Do you want to play again? Type Y or N.\n";

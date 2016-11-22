@@ -19,19 +19,29 @@ programs sunch as OpenCV and a camera to acquire information on cards in its
 hand and to be asked for cards.
 */
 
-#include "logic.h"
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/opencv.hpp>
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 #include <iomanip>
+#include <ctime>
+
+#include "take_pictures.h"
+#include "logic.h"
 
 bool man_switch = false;
 
 int main()
 {
 	int loop_end = 0;
-	char input = '';
-	int init_card[5] = {0};
+	char input = ' ';
+	int init_card[5] = {0, 0, 0, 0, 0};
 	int scan_card = 0;
 	int starter = 0;
+	srand(time());
 
 	choice:
 		cout << "Do you want to play in manual mode or camera mode?\n";
@@ -43,7 +53,7 @@ int main()
 			{
 				cout << "Input card "<< i << " rank\n"; // asuming we put in only right inputs TODO: add period
 				cin >> input;
-				init_card[i-1] = atoi(input);
+				init_card[i-1] = input - '0';
 			}
 			man_switch = true;
 			game_init(init_card[0],init_card[1],init_card[2],init_card[3],init_card[4]);
@@ -54,7 +64,7 @@ int main()
 			}
 			else
 			{
-				whos_turn += starter
+				whos_turn += starter;
 				starter++;
 			}
 			goto play;			
@@ -76,7 +86,7 @@ int main()
 		if (whos_turn == 0)
 		{
 			do_you_have(man_switch);
-			if(isGameOver() == 1)
+			if(isGameOver(books_made) == 1)
 			{
 				score_screen();
 				
@@ -91,8 +101,8 @@ int main()
 	if(input == 89 || input == 121)
 	{
 		loop_end = 0;
-		input = '';
-		init_card = {0,0,0,0,0};
+		input = ' ';
+		memset(init_card,0,sizeof(init_card));
 		scan_card = 0;
 		ai_level = 0;
 		man_switch = false;

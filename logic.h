@@ -28,17 +28,13 @@ functions, required includes, and predefined varables.
 
 using namespace std;
 
-int score_P1 = 0; //This is the computer.
-int score_P2 = 0;
-int score_P3 = 0;
-int score_P4 = 0;
+int scores[4] = {0};
 
 int how_smart_am_i = 0;
 //used for dificulty? 0-x
 
 int books_made = 0;
 
-int whos_turn = 0;
 
 int cards[4][13] = {0};
 //rows represent suit and columns represent rank.
@@ -58,9 +54,9 @@ E: increments books_made and the correct playes score by 1 and sets
    card array rank position to booked.
 */
 
-int do_i_have(int rank,int player_num, bool manual);
+int do_i_have(int player_num,bool manual,int from_cam);
 /*
-R: rank of cards asked for and who asked
+R: who asked, manual switch, and camera input
 M: cards array
 E: Checks to see if the computer has a card asked for and returns 1 if true.
    Alters card array based on if true and AI level. 
@@ -75,16 +71,16 @@ E: returns 1 if computer got what it was looking for and may call book_made.
    It may also increment whos_turn
 */
 
-void do_you_have();
+void do_you_have(bool manual,int from_cam);
 /*
-R: N/A
+R: manual on off and input from the camera
 M: cards array
 E: askes for a card based on the card array
 */
 
-void other_players_turn();
+void other_players_turn(bool manual, int from_cam);
 /*
-R: N/A
+R: Manual on/off and camera input
 M: cards array books made whos turn
 E: gathers data from operator during other players turns
 */

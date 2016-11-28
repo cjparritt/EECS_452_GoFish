@@ -20,8 +20,6 @@ hand and to be asked for cards.
 */
 
 #include "logic.h"
-#include <iostream>
-#include <iomanip>
 
 bool man_switch = false;
 int whos_turn = 0;

@@ -18,6 +18,11 @@ go fish player. It is made to interface with perrifirial devices and
 programs sunch as OpenCV and a camera to acquire infromation on cards in its
 hand and to be asked for cards.
 */
+<<<<<<< HEAD
+=======
+#include "global.h"
+#include "logic.h"
+>>>>>>> refs/remotes/origin/master
 
 int isGameOver(int books_made)
 {
@@ -99,7 +104,7 @@ int go_fish(int rank, int drawn_card)
 
 }
 
-void do_you_have(bool manual)
+void do_you_have()
 {
 	int draw = 0;
 	char input = ' ';
@@ -159,7 +164,11 @@ void do_you_have(bool manual)
 		else if(input == 78 || input == 110)
 		{
 			cout << "Please draw me a card! \n";
+<<<<<<< HEAD
 			cout << "What rank did you draw for me? \n"
+=======
+			cout << "What rank did you draw for me?";
+>>>>>>> refs/remotes/origin/master
 			cin >> draw;
 			if(go_fish(guess, draw) == 1)
 			{
@@ -393,7 +402,11 @@ void  other_players_turn() //Assuming we will not provide wrong data
 	cin >> asked_player;
 	if(asked_player == 1)
 	{
+<<<<<<< HEAD
 		if(do_i_have(rank,asked_player,manual) == 1)
+=======
+		if(do_i_have(rank,asked_player) == 1)
+>>>>>>> refs/remotes/origin/master
 		{
 			if(isGameOver(books_made) == 1)
 			{
@@ -403,7 +416,11 @@ void  other_players_turn() //Assuming we will not provide wrong data
 		}
 		else
 		{
+<<<<<<< HEAD
 			cout << "Go Fish!\n"''
+=======
+			cout << "Go Fish!\n";
+>>>>>>> refs/remotes/origin/master
 			goto q5;
 		}
 	}
@@ -471,15 +488,17 @@ void  other_players_turn() //Assuming we will not provide wrong data
 			goto q3;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 =======
 >>>>>>> refs/remotes/origin/Duane
+=======
+>>>>>>> refs/remotes/origin/master
 }
 
 void score_screen()
 {
-<<<<<<< HEAD
 	int highest = 0;
 	int winner[4] = {0,0,0,0};
 	for (int i = 0; i < 4; ++i)
@@ -497,8 +516,4 @@ void score_screen()
 			cout << "Player" << (i+1) << " wins\n";
 		}
 	}
-=======
-
-
->>>>>>> refs/remotes/origin/Duane
 }

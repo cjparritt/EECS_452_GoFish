@@ -28,6 +28,7 @@ functions, required includes, and predefined varables.
 
 using namespace std;
 
+<<<<<<< HEAD
 int scores[4] = {0,0,0,0};
 
 int ai_level = 0;
@@ -42,6 +43,8 @@ int cards[4][13] = {0};
 
 bool manual = 1;
 
+=======
+>>>>>>> refs/remotes/origin/master
 int isGameOver(int books_made);
 
 /*
@@ -58,7 +61,7 @@ E: increments books_made and the correct playes score by 1 and sets
    card array rank position to booked.
 */
 
-int do_i_have(int rank,int player_num, bool manual);
+int do_i_have(int rank,int player_num);
 /*
 R: rank of cards asked for and who asked
 M: cards array

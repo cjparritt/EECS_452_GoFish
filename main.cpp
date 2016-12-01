@@ -28,20 +28,110 @@ hand and to be asked for cards.
 #include <stdlib.h>
 #include <iomanip>
 #include <ctime>
+<<<<<<< HEAD
 
 #include "take_pictures.h"
 #include "logic.h"
+=======
+#include <set>
+#include <map>
 
-bool man_switch = false;
+#include "global.h"
+
+#include "extractcard.h"
+
+#include "take_pictures.h"
+
+#include "logic.h"
+
+
+
+using namespace cv;
+using namespace std;
+
+>>>>>>> refs/remotes/origin/master
+
 
 int main()
 {
+/*
+
+    if( argc != 2)
+    {
+        cout <<" Usage: display_image ImageToLoadAndDisplay" << endl;
+        return -1;
+    }
+    
+    Mat src;                                                                    //Source image
+    src = imread(argv[1], CV_LOAD_IMAGE_COLOR);   // Read the file
+    
+    if(! src.data )                              // Check for invalid input
+    {
+        cout <<  "Could not open or find the image" << std::endl ;
+        return -1;
+    }
+
+
+
+   
+    Mat src;                                                                    //Source image
+    src = imread("test.jpg");   // Read the file
+
+
+Hi();
+
+    imshow("Source Image", src);
+    //waitKey(0);
+
+
+    // Create binary image from source image
+    Mat bw_src;
+    preproccess(src, bw_src);
+    imshow("Binary Image", bw_src);
+    waitKey(0);
+
+
+
+
+    //Find contours of cards and approximate them as rectangles
+    vector<vector<Point> > contours;
+
+    Mat output(Size(450,630), CV_8UC3);
+    findCardContours(src, bw_src, output);
+    
+  
+
+
+
+
+
+
+
+
+
+
+    printf("Hello World!\n");
+    return 0;
+*/
+
+
+
+
+
+
 	int loop_end = 0;
 	char input = ' ';
+<<<<<<< HEAD
 	int init_card[5] = {0, 0, 0, 0, 0};
 	int scan_card = 0;
 	int starter = 0;
 	srand(time());
+=======
+	int init_card[5] = {0};
+	int scan_card = 0;
+	int starter = 0;
+	srand(time(0));
+>>>>>>> refs/remotes/origin/master
 
 	choice:
 		cout << "Do you want to play in manual mode or camera mode?\n";
@@ -55,7 +145,7 @@ int main()
 				cin >> input;
 				init_card[i-1] = input - '0';
 			}
-			man_switch = true;
+			manual = true;
 			game_init(init_card[0],init_card[1],init_card[2],init_card[3],init_card[4]);
 			if(starter == 4)
 			{
@@ -85,7 +175,11 @@ int main()
 		play://TODO:Need to add functions
 		if (whos_turn == 0)
 		{
+<<<<<<< HEAD
 			do_you_have(man_switch);
+=======
+			do_you_have();
+>>>>>>> refs/remotes/origin/master
 			if(isGameOver(books_made) == 1)
 			{
 				score_screen();
@@ -105,7 +199,7 @@ int main()
 		memset(init_card,0,sizeof(init_card));
 		scan_card = 0;
 		ai_level = 0;
-		man_switch = false;
+		manual = false;
 		goto choice;
 	}
 	else if(input == 78 || input == 110)

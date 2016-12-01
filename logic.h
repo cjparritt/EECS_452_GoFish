@@ -28,17 +28,6 @@ functions, required includes, and predefined varables.
 
 using namespace std;
 
-int scores[4] = {0};
-
-int how_smart_am_i = 0;
-//used for dificulty? 0-x
-
-int books_made = 0;
-
-
-int cards[4][13] = {0};
-//rows represent suit and columns represent rank.
-
 int isGameOver(int books_made);
 /*
 R: number of books made
@@ -54,9 +43,9 @@ E: increments books_made and the correct playes score by 1 and sets
    card array rank position to booked.
 */
 
-int do_i_have(int player_num,bool manual,int from_cam);
+int do_i_have(int rank,int player_num);
 /*
-R: who asked, manual switch, and camera input
+R: rank of cards asked for and who asked
 M: cards array
 E: Checks to see if the computer has a card asked for and returns 1 if true.
    Alters card array based on if true and AI level. 
@@ -71,16 +60,16 @@ E: returns 1 if computer got what it was looking for and may call book_made.
    It may also increment whos_turn
 */
 
-void do_you_have(bool manual,int from_cam);
+void do_you_have();
 /*
-R: manual on off and input from the camera
+R: Manual switch variable (TRUE if playing in manual mode)
 M: cards array
 E: askes for a card based on the card array
 */
 
-void other_players_turn(bool manual, int from_cam);
+void other_players_turn();
 /*
-R: Manual on/off and camera input
+R: N/A
 M: cards array books made whos turn
 E: gathers data from operator during other players turns
 */

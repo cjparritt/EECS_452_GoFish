@@ -28,11 +28,6 @@ hand and to be asked for cards.
 #include <stdlib.h>
 #include <iomanip>
 #include <ctime>
-<<<<<<< HEAD
-
-#include "take_pictures.h"
-#include "logic.h"
-=======
 #include <set>
 #include <map>
 
@@ -49,7 +44,6 @@ hand and to be asked for cards.
 using namespace cv;
 using namespace std;
 
->>>>>>> refs/remotes/origin/master
 
 
 int main()
@@ -121,17 +115,10 @@ Hi();
 
 	int loop_end = 0;
 	char input = ' ';
-<<<<<<< HEAD
-	int init_card[5] = {0, 0, 0, 0, 0};
-	int scan_card = 0;
-	int starter = 0;
-	srand(time());
-=======
 	int init_card[5] = {0};
 	int scan_card = 0;
 	int starter = 0;
 	srand(time(0));
->>>>>>> refs/remotes/origin/master
 
 	choice:
 		cout << "Do you want to play in manual mode or camera mode?\n";
@@ -139,9 +126,10 @@ Hi();
 		cin >> input;
 		if(input == 77 || input == 109)//Manual
 		{
+			cout << "What cards do I have? Input 0-9,:,;,< for A-K:" << endl;
 			for(int i = 1; i < 6; ++i)
 			{
-				cout << "Input card "<< i << " rank\n"; // asuming we put in only right inputs TODO: add period
+				cout << "Input card "<< i << " rank:\n"; // asuming we put in only right inputs
 				cin >> input;
 				init_card[i-1] = input - '0';
 			}
@@ -175,17 +163,14 @@ Hi();
 		play://TODO:Need to add functions
 		if (whos_turn == 0)
 		{
-<<<<<<< HEAD
-			do_you_have(man_switch);
-=======
 			do_you_have();
->>>>>>> refs/remotes/origin/master
 			if(isGameOver(books_made) == 1)
 			{
 				score_screen();
 				
 			}
 		}
+		else other_players_turn();
 
 
 	}

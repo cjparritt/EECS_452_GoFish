@@ -18,11 +18,8 @@ go fish player. It is made to interface with perrifirial devices and
 programs sunch as OpenCV and a camera to acquire infromation on cards in its
 hand and to be asked for cards.
 */
-<<<<<<< HEAD
-=======
 #include "global.h"
 #include "logic.h"
->>>>>>> refs/remotes/origin/master
 
 int isGameOver(int books_made)
 {
@@ -45,19 +42,19 @@ void book_made(int player_num, int rank)
 	{
 		cards[i][rank] = -1;
 	}
-	if (player_num = 1)
+	if (player_num == 1)
 	{
 		++scores[0];
 	}
-	if (player_num = 2)
+	if (player_num == 2)
 	{
 		++scores[1];
 	}
-	if (player_num = 3)
+	if (player_num == 3)
 	{
 		++scores[2];
 	}
-	if (player_num = 4)
+	if (player_num == 4)
 	{
 		++scores[3];
 	}
@@ -164,11 +161,7 @@ void do_you_have()
 		else if(input == 78 || input == 110)
 		{
 			cout << "Please draw me a card! \n";
-<<<<<<< HEAD
-			cout << "What rank did you draw for me? \n"
-=======
 			cout << "What rank did you draw for me?";
->>>>>>> refs/remotes/origin/master
 			cin >> draw;
 			if(go_fish(guess, draw) == 1)
 			{
@@ -322,7 +315,7 @@ void game_init(int card_1_rank,int card_2_rank,int card_3_rank,int card_4_rank,
 		cards[1][card_4_rank] += 1;
 		cards[1][card_5_rank] += 1;
 		ai_set:
-		cout << "How smart am I?";
+		cout << "How smart am I? Please select 1, 2, or 3:" << endl;
 		cin >> ai_level;
 		if(ai_level > 3 || ai_level < 1)
 		{
@@ -340,7 +333,7 @@ void  other_players_turn() //Assuming we will not provide wrong data
 	int rank = 0;
 	int asked_player;
 	q1:
-	cout << "What did they ask for?\n";
+	cout << "What did player " << whos_turn + 1 << " ask for? Select A, 1-9, 0, J, Q, or K:" << endl;
 	cin >> input;
 	if(input == 'a' || input == 'A')
 	{
@@ -402,12 +395,15 @@ void  other_players_turn() //Assuming we will not provide wrong data
 	cin >> asked_player;
 	if(asked_player == 1)
 	{
-<<<<<<< HEAD
-		if(do_i_have(rank,asked_player,manual) == 1)
-=======
-		if(do_i_have(rank,asked_player) == 1)
->>>>>>> refs/remotes/origin/master
+		if(do_i_have(rank,whos_turn+1) == 1)
 		{
+			cout << "Yes, here you go!" << endl;
+			cout << "Was a book made?" << endl;
+			cin >> input;
+			if(input==89 || input==121)//yes
+			{
+				book_made(whos_turn + 1, rank);
+			}
 			if(isGameOver(books_made) == 1)
 			{
 				return;
@@ -416,11 +412,7 @@ void  other_players_turn() //Assuming we will not provide wrong data
 		}
 		else
 		{
-<<<<<<< HEAD
-			cout << "Go Fish!\n"''
-=======
 			cout << "Go Fish!\n";
->>>>>>> refs/remotes/origin/master
 			goto q5;
 		}
 	}
@@ -433,9 +425,11 @@ void  other_players_turn() //Assuming we will not provide wrong data
 			cout << "How many did they get?\n";
 			cin >> amount;
 			cards[whos_turn][rank] += amount;
-			if (cards[whos_turn][rank] == 4)
+			cout << "Was a book made?" << endl;
+			cin >> input;
+			if(input==89 || input==121) //yes
 			{
-				book_made(whos_turn,rank);
+				book_made(whos_turn + 1, rank);
 				if(isGameOver(books_made) == 1)
 				{
 					return;
@@ -443,10 +437,11 @@ void  other_players_turn() //Assuming we will not provide wrong data
 			}
 			goto q1;
 		}
-		if(input == 78 || input == 110)//no
+		else if(input == 78 || input == 110)//no
 		{ 
 			q5:
-			cout << "Did they draw what they were looking for?\n";
+			cout << "Did player " << whos_turn + 1 << " draw what they were looking for?\n";
+			cin >> input;
 			if (input == 89 || input == 121)
 			{
 				cards[whos_turn][rank] += 1;
@@ -462,8 +457,16 @@ void  other_players_turn() //Assuming we will not provide wrong data
 				}
 			goto q1;
 			}
-			if(input == 78 || input == 110)//no
+			else if(input == 78 || input == 110)//no
 			{
+				cout << "Was a book made?" << endl;
+				cin >> input;
+				
+				if(input == 89 || input == 121)
+				{
+					book_made(whos_turn + 1, rank);
+				}
+
 				if(cards[whos_turn][rank] == 0)
 				{
 					cards[whos_turn][rank] = 1;
@@ -487,14 +490,6 @@ void  other_players_turn() //Assuming we will not provide wrong data
 			cout << "invalid answer\n";
 			goto q3;
 		}
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-=======
->>>>>>> refs/remotes/origin/Duane
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 void score_screen()

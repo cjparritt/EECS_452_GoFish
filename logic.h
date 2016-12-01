@@ -28,25 +28,7 @@ functions, required includes, and predefined varables.
 
 using namespace std;
 
-<<<<<<< HEAD
-int scores[4] = {0,0,0,0};
-
-int ai_level = 0;
-//used for dificulty? 0-x
-
-int books_made = 0;
-
-int whos_turn = 0;
-
-int cards[4][13] = {0};
-//rows represent suit and columns represent rank.
-
-bool manual = 1;
-
-=======
->>>>>>> refs/remotes/origin/master
 int isGameOver(int books_made);
-
 /*
 R: number of books made
 M: N/A
@@ -78,7 +60,7 @@ E: returns 1 if computer got what it was looking for and may call book_made.
    It may also increment whos_turn
 */
 
-void do_you_have(bool manual);
+void do_you_have();
 /*
 R: Manual switch variable (TRUE if playing in manual mode)
 M: cards array

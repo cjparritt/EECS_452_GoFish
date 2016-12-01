@@ -121,23 +121,23 @@ void do_you_have()
 		}
 		if(guess == 0)
 		{
-			cout << "Player " << player_guess << "do you have any Aces?\n";
+			cout << "Player " << player_guess << " do you have any Aces?\n";
 		}
 		else if(guess == 10)
 		{
-			cout << "Player " << player_guess << "do you have any Jacks?\n";
+			cout << "Player " << player_guess << " do you have any Jacks?\n";
 		}
 		else if(guess == 11)
 		{
-			cout << "Player " << player_guess << "do you have any Queens?\n";
+			cout << "Player " << player_guess << " do you have any Queens?\n";
 		}
 		else if(guess == 12)
 		{
-			cout << "Player " << player_guess << "do you have any Kingss?\n";
+			cout << "Player " << player_guess << " do you have any Kingss?\n";
 		}
 		else
 		{
-			cout << "Player " << player_guess << "do you have any "<< guess+1 << "s?\n";
+			cout << "Player " << player_guess << " do you have any "<< guess+1 << "s?\n";
 		}
 		answer_d:
 		cin >> input;//Y or y yes n or N no
@@ -158,10 +158,10 @@ void do_you_have()
 			}
 			goto guess_card;
 		}
-		else if(input == 78 || input == 110)
+		else if(input == 78 || input == 110)//No
 		{
 			cout << "Please draw me a card! \n";
-			cout << "What rank did you draw for me?";
+			cout << "What rank did you draw for me? Please enter 0-12 for A-K:" << endl;
 			cin >> draw;
 			if(go_fish(guess, draw) == 1)
 			{
@@ -402,13 +402,19 @@ void  other_players_turn() //Assuming we will not provide wrong data
 			cin >> input;
 			if(input==89 || input==121)//yes
 			{
-				book_made(whos_turn + 1, rank);
+				//int player_num = whos_turn+1;
+				book_made(whos_turn + 1, rank);//TEMP
 			}
 			if(isGameOver(books_made) == 1)
 			{
 				return;
 			}
-			goto q1;
+			if(whos_turn == 3)
+			{
+				whos_turn = 0;
+				return;
+			}
+			else	goto q1;
 		}
 		else
 		{
@@ -429,7 +435,8 @@ void  other_players_turn() //Assuming we will not provide wrong data
 			cin >> input;
 			if(input==89 || input==121) //yes
 			{
-				book_made(whos_turn + 1, rank);
+				int player_num = whos_turn + 1;
+				book_made(player_num, rank);
 				if(isGameOver(books_made) == 1)
 				{
 					return;
@@ -464,7 +471,8 @@ void  other_players_turn() //Assuming we will not provide wrong data
 				
 				if(input == 89 || input == 121)
 				{
-					book_made(whos_turn + 1, rank);
+					int player_num = whos_turn + 1;
+					book_made(player_num, rank);
 				}
 
 				if(cards[whos_turn][rank] == 0)

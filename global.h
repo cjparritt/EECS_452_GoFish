@@ -8,7 +8,7 @@ extern int ai_level;
 
 extern int books_made;
 
-extern int whos_turn;
+extern int whos_turn = 0;
 
 extern int cards[4][13];
 //rows represent suit and columns represent rank.

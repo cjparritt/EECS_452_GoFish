@@ -38,6 +38,8 @@ hand and to be asked for cards.
 #include "take_pictures.h"
 
 #include "logic.h"
+#include <iostream>
+#include <iomanip>
 
 
 

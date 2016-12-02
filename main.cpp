@@ -164,8 +164,13 @@ Hi();
 		play://TODO:Need to add functions
 		if (whos_turn == 0)
 		{
+<<<<<<< HEAD
 			do_you_have();
 			if(isGameOver(books_made) == 1)
+=======
+			do_you_have(man_switch);
+			if(isGameOver() == 1)
+>>>>>>> parent of 5c39234... Finished Main Logic
 			{
 				score_screen();
 				

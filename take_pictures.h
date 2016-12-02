@@ -1,1 +1,0 @@
-int take_pictures(std::string filename);

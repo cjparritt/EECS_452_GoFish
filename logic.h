@@ -25,10 +25,15 @@ functions, required includes, and predefined varables.
 #include <ctime>
 #include <cstdlib>
 #include <cmath>
-
+extern int scores[4];
+extern int ai_level;
+extern int books_made;
+extern int whos_turn;
+extern int cards[4][13]; //rows represent suit and columns represent rank.
+extern bool manual;
 using namespace std;
 
-int isGameOver(int books_made);
+int isGameOver();
 /*
 R: number of books made
 M: N/A

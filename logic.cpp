@@ -18,10 +18,16 @@ go fish player. It is made to interface with perrifirial devices and
 programs sunch as OpenCV and a camera to acquire infromation on cards in its
 hand and to be asked for cards.
 */
-#include "global.h"
 #include "logic.h"
 
-int isGameOver(int books_made)
+int scores[4] = { 0,0,0,0 };
+int ai_level = 0;
+int books_made = 0;
+int whos_turn = 0;
+int cards[4][13] = { 0 }; //rows represent suit and columns represent rank.
+bool manual = false;
+
+int isGameOver()
 {
 	if (books_made == 13)
 	{
@@ -103,6 +109,7 @@ int go_fish(int rank, int drawn_card)
 
 void do_you_have()
 {
+	unsigned int X = 777;
 	int draw = 0;
 	char input = ' ';
 	if(ai_level == 1)//DUMB !! may ask same question
@@ -111,12 +118,14 @@ void do_you_have()
 		int guess = rand() % 13;
 		if (cards[1][guess] < 1)
 		{
+			srand(rand());
 			goto guess_card;/* make sure its valid */
 		}
 		reroll_d:
 		int player_guess = rand() % 4 + 1;
 		if(player_guess == 1)
 		{
+			srand(rand());
 			goto reroll_d;
 		}
 		if(guess == 0)
@@ -151,7 +160,7 @@ void do_you_have()
 			if (cards[1][guess] == 4)
 			{
 				 book_made(1, guess);
-				 if(isGameOver(books_made) == 1)
+				 if(isGameOver() == 1)
 				 {
 				 	return;
 				 }
@@ -262,7 +271,7 @@ void do_you_have()
 			if (cards[1][target] == 4)
 			{
 				 book_made(1, target);
-				 if(isGameOver(books_made) == 1)
+				 if(isGameOver() == 1)
 				 {
 				 	return;
 				 }
@@ -397,7 +406,7 @@ void  other_players_turn() //Assuming we will not provide wrong data
 	{
 		if(do_i_have(rank,asked_player) == 1)
 		{
-			if(isGameOver(books_made) == 1)
+			if(isGameOver() == 1)
 			{
 				return;
 			}
@@ -421,7 +430,7 @@ void  other_players_turn() //Assuming we will not provide wrong data
 			if (cards[whos_turn][rank] == 4)
 			{
 				book_made(whos_turn,rank);
-				if(isGameOver(books_made) == 1)
+				if(isGameOver() == 1)
 				{
 					return;
 				}
@@ -440,7 +449,7 @@ void  other_players_turn() //Assuming we will not provide wrong data
 				if(input== 89 || input == 121)//yes
 				{
 					book_made(whos_turn,rank);
-					if(isGameOver(books_made) == 1)
+					if(isGameOver() == 1)
 					{
 						return;
 					}

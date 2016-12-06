@@ -25,6 +25,12 @@ functions, required includes, and predefined varables.
 #include <ctime>
 #include <cstdlib>
 #include <cmath>
+#include <cstdio>
+#include <memory>
+#include <stdexcept>
+#include <string>
+#include <fstream>
+
 extern int scores[4];
 extern int ai_level;
 extern int books_made;
@@ -93,5 +99,10 @@ R: N/A
 M: N/A
 E: Displays the winner(s)
 */
+
+int yes_no_box(string question);
+// Requires: Caller must supply a yes or no question to be asked in the form of a string.
+// Modifies:
+// Explain: A dialog box will pop up displaying the question where the user can select yes or no. Function returns 1 if user selects yes, 0 if user selects no,-1 if no selection is made, and -2 if there is an error.
 
 #endif

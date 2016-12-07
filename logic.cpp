@@ -26,6 +26,7 @@ int books_made = 0;
 int whos_turn = 0;
 int cards[4][13] = { 0 }; //rows represent suit and columns represent rank.
 bool manual = false;
+int num_players = 0;
 
 int isGameOver()
 {
@@ -111,7 +112,6 @@ int go_fish(int rank, int drawn_card)
 
 void do_you_have()
 {
-	//unsigned int X = 777;
 	int draw = 0;
 	char input = ' ';
 	if(ai_level == 1)//DUMB !! may ask same question
@@ -120,14 +120,12 @@ void do_you_have()
 		int guess = rand() % 13;
 		if (cards[0][guess] < 1)
 		{
-			srand(rand());
 			goto guess_card;/* make sure its valid */
 		}
 		reroll_d:
-		int player_guess = rand() % 4 + 1;
+		int player_guess = (rand() % num_players) + 1;
 		if(player_guess == 1)
 		{
-			srand(rand());
 			goto reroll_d;
 		}
 		if(guess == 0)
@@ -231,8 +229,8 @@ void do_you_have()
 					goto guess_card_n;/* make sure its valid */
 				}
 				reroll_n:
-				int player_target = rand() % 4 + 1;
-				if(player_target == 1)
+				int player_target = (rand() % num_players) + 1;
+				if(player_target == 0)
 				{
 					goto reroll_n;
 				}
@@ -303,7 +301,7 @@ void do_you_have()
 	}
 	if(ai_level == 3)//Smart
 	{
-		goto temp_smart; // need to figure out a smart AI
+		goto temp_smart; // should not get here now.
 	}
 	cout << "invalid AI level exiting" << endl; //add endline
 	exit(1);
@@ -326,12 +324,26 @@ void game_init(int card_1_rank,int card_2_rank,int card_3_rank,int card_4_rank,
 		cards[0][card_4_rank] += 1;
 		cards[0][card_5_rank] += 1;
 		ai_set:
-		cout << "How smart am I? Please select 1, 2, or 3:" << endl;
+		cout << "How smart am I? Please select 1, 2, or 3:\n";
 		cin >> ai_level;
 		if(ai_level > 3 || ai_level < 1)
 		{
 			cout << "invalid level\n choose 1-3\n";
 			goto ai_set;
+		}
+		if (ai_level == 3)
+		{
+			ai_level = 2;
+			cout << "You have choosen a level beyond the scope of my programing.\n";
+			cout << "Reverting to default AI level.\n";
+		}
+	    player_set:
+		cout << "How many players are there? Please select 2, 3, or 4:\n";
+		cin >> num_players;
+		if (num_players > 4 || num_players < 2)
+		{
+			cout << "invalid number\n choose 2-4\n";
+			goto player_set;
 		}
 		whos_turn = 1;
 		return;
@@ -346,10 +358,10 @@ void  other_players_turn() //Assuming we will not provide wrong data
 	q1:
 	cout << "What did player " << whos_turn + 1 << " ask for? Select A, 2-9, T, J, Q, or K:" << endl;
 	cin >> input;
-	if (input == '1')
+	if (input == '1' || input == '0')
 	{
 		cin.ignore(10000,'\n');
-		cout << "Try typing T instead of 10, you fool! \n";
+		cout << "Try typing T instead of 10, 1, or 0 please.\n";
 		cin >> input;
 	}
 	if (input == 'a' || input == 'A')
@@ -396,7 +408,10 @@ void  other_players_turn() //Assuming we will not provide wrong data
 			{
 				return;
 			}
-			else	goto q1;
+			else
+			{
+				goto q1;
+			}
 		}
 		else
 		{

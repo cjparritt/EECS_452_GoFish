@@ -19,10 +19,10 @@ programs sunch as OpenCV and a camera to acquire information on cards in its
 hand and to be asked for cards.
 */
 
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/opencv.hpp>
+//#include <opencv2/core/core.hpp>
+//#include <opencv2/highgui/highgui.hpp>
+//#include <opencv2/imgproc/imgproc.hpp>
+//#include <opencv2/opencv.hpp>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,17 +33,17 @@ hand and to be asked for cards.
 #include <cstring>
 #include "logic.h"
 
-#include "take_pictures.h"
-#include "extractcard.h"
+//#include "take_pictures.h"
+//#include "extractcard.h"
 
 
-using namespace cv;
+//using namespace cv;
 using namespace std;
 
 
 
 int main()
-{
+{/*
 take_pictures("source.jpg");
 vector<int> cards_in_hand;
     Mat src;                                                                    //Source image
@@ -92,8 +92,8 @@ vector<int> cards_in_hand;
 
 
 
-
-/*	
+*/
+	
 int loop_end = 0;
 	char input = ' ';
 	int init_card[5] = {0};
@@ -112,10 +112,10 @@ int loop_end = 0;
 			{
 				cout << "Input card "<< i << " rank:\n"; // asuming we put in only right inputs
 				cin >> input;
-				if (input == '1')
+				if (input == '1' || input == '0')
 				{
 					cin.ignore(10000,'\n');
-					cout << "Try typing T instead of 10, you fool! \n";
+					cout << "Try typing T instead of 10, 1, or 0 please.\n";
 					cin >> input;
 				}
 				if (input == 'a' || input == 'A')
@@ -151,7 +151,7 @@ int loop_end = 0;
 			}
 			manual = true;
 			game_init(init_card[0],init_card[1],init_card[2],init_card[3],init_card[4]);
-			if(starter == 4)
+			if(starter == num_players)
 			{
 				starter = 0;
 				whos_turn += starter;
@@ -184,8 +184,8 @@ int loop_end = 0;
 				if (isGameOver() == 1)
 				{
 					score_screen();
-						loop_end = 1;
-						++loop_end;
+					loop_end = 1;
+					++loop_end;
 				}
 			}
 			else
@@ -197,7 +197,7 @@ int loop_end = 0;
 					loop_end = 1;
 				}
 			}
-			if (whos_turn == 4)
+			if (whos_turn == num_players)
 				whos_turn = 0;
 				//other_players_turn(); //1 is placeholder for cam fun
 			if (isGameOver() == 1)
@@ -205,10 +205,10 @@ int loop_end = 0;
 				score_screen();
 				++loop_end;
 			}
-		}
-		if (whos_turn >= 4)
-		{
-			whos_turn = 0;
+			if (whos_turn >= num_players)
+			{
+				whos_turn = 0;
+			}
 		}
 	again:
 	cout << "Do you want to play again? Type Y or N.\n";
@@ -233,5 +233,5 @@ int loop_end = 0;
 			cout << "Invalid input!\n";
 			goto again;
 		}
-*/
+
 }

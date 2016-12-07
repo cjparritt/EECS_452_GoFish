@@ -94,7 +94,7 @@ vector<int> cards_in_hand;
 
 */
 	
-int loop_end = 0;
+	int loop_end = 0;
 	char input = ' ';
 	int init_card[5] = {0};
 	int scan_card = 0;

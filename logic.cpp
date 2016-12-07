@@ -543,3 +543,74 @@ int yes_no_box(string question)
 	}
 	else return -2;
 }
+
+void getcards(int * newhand)
+{
+	vector<int> cards_in_hand;
+
+	//Obtain source image
+	take_pictures("source.jpg");
+    	Mat src;
+    	src = imread("source.jpg");
+
+	//namedWindow("Source Image", WINDOW_NORMAL);
+	//imshow("Source Image", src);
+	//resizeWindow("Source Image", WINDOW_WIDTH, WINDOW_HEIGHT);
+	//waitKey(0);
+
+    	// Create binary image from source image
+    	Mat bw_src;
+    	preproccess(src, bw_src);
+
+	//    namedWindow("Binary Image", WINDOW_NORMAL);
+	//    imshow("Binary Image", bw_src);
+	//    resizeWindow("Binary Image", WINDOW_WIDTH, WINDOW_HEIGHT);
+	//    waitKey(0);
+
+	//imwrite("1201_1.tif", bw_src);
+
+    	//Find contours of cards and approximate them as rectangles
+	//    vector<vector<Point> > contours;
+
+    	Mat output(Size(450,630), CV_8UC3);
+    	
+	cards_in_hand = findCardContours(src, bw_src, output);
+
+	//Initialize newhand to zero
+	for(int i = 0; i < 13; i++)
+	{
+		newhand[i] = 0;
+	}
+
+	//Output cards to newhand
+    	for(int i = 0; i < cards_in_hand.size(); i++)
+    	{
+        	newhand[cards_in_hand[i]]++;
+    	}
+}
+
+void card_diff_check(int * currenthand, int * temphand)
+{
+	for (int i = 0; i < 13; i++)
+	{
+		temphand[i] = temphand[i] - currenthand[i];
+	}
+}
+
+int identify_new_card()
+{
+	int temphand[13];
+	getcards(temphand);
+	card_diff_check(cards[0],temphand);
+	int max = -100;
+	int idx_max = -1;
+	for (int i = 0; i < 13; i++)
+		{
+			if (temphand[i] > max)
+			{
+				max = temphand[i];
+				idx_max = i;
+			}
+		}
+return idx_max;
+}

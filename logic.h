@@ -116,6 +116,8 @@ int yes_no_box(string question);
 // Modifies:
 // Explain: A dialog box will pop up displaying the question where the user can select yes or no. Function returns 1 if user selects yes, 0 if user selects no,-1 if no selection is made, and -2 if there is an error.
 
+/*
+
 void getcards(int *newhand);
 // Requires: Caller supplies a pointer to an array of length 13 to hold the
 // new values for the computer's hand. 
@@ -139,4 +141,7 @@ int identify_new_card();
 // Modifies: N/A
 // Effects: Checks what card has been added to the computer's hand and returns the rank of that card.
 
+*/
+
 #endif
+

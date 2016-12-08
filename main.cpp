@@ -97,6 +97,7 @@ vector<int> cards_in_hand;
 	int loop_end = 0;
 	char input = ' ';
 	int init_card[5] = {0};
+	int cam_init_card[13] = {0};
 	int scan_card = 0;
 	int starter = 0;
 	srand(time(0));
@@ -165,8 +166,18 @@ vector<int> cards_in_hand;
 		}
 		else if(input == 67 || input == 99)//Camera
 		{
-			//TODO: Need to add cam stuff
-			
+			game_init(0,0,0,0,0);
+			if(starter == num_players)
+			{
+				starter = 0;
+				whos_turn += starter;
+			}
+			else
+			{
+				whos_turn += starter;
+				starter++;
+			}
+			goto play;	
 		}
 		else
 		{

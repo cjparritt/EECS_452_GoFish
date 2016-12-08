@@ -19,10 +19,10 @@ programs sunch as OpenCV and a camera to acquire information on cards in its
 hand and to be asked for cards.
 */
 
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/opencv.hpp>
+//#include <opencv2/core/core.hpp>
+//#include <opencv2/highgui/highgui.hpp>
+//#include <opencv2/imgproc/imgproc.hpp>
+//#include <opencv2/opencv.hpp>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,17 +33,71 @@ hand and to be asked for cards.
 #include <cstring>
 #include "logic.h"
 
-#include "take_pictures.h"
-#include "extractcard.h"
+//#include "take_pictures.h"
+//#include "extractcard.h"
 
 
-using namespace cv;
+//using namespace cv;
 using namespace std;
 
 
 
 int main()
+<<<<<<< HEAD
 {
+=======
+{/*
+take_pictures("source.jpg");
+vector<int> cards_in_hand;
+    Mat src;                                                                    //Source image
+    src = imread("source.jpg");   // Read the file
+
+
+
+
+//namedWindow("Source Image", WINDOW_NORMAL);
+//imshow("Source Image", src);
+//resizeWindow("Source Image", WINDOW_WIDTH, WINDOW_HEIGHT);
+//waitKey(0);
+
+
+
+    // Create binary image from source image
+    Mat bw_src;
+    preproccess(src, bw_src);
+
+//    namedWindow("Binary Image", WINDOW_NORMAL);
+//    imshow("Binary Image", bw_src);
+//    resizeWindow("Binary Image", WINDOW_WIDTH, WINDOW_HEIGHT);
+//    waitKey(0);
+
+//imwrite("1201_1.tif", bw_src);
+
+
+
+
+    //Find contours of cards and approximate them as rectangles
+//    vector<vector<Point> > contours;
+
+    Mat output(Size(450,630), CV_8UC3);
+    cards_in_hand = findCardContours(src, bw_src, output);
+    for(int i = 0; i < cards_in_hand.size(); i++)
+    {
+        cout << cards_in_hand[i] << "\n";
+    }
+  
+
+
+
+
+
+
+
+
+
+*/
+	
+>>>>>>> origin/master
 	int loop_end = 0;
 	char input = ' ';
 	int init_card[5] = {0};
@@ -101,7 +155,11 @@ int main()
 				}
 			}
 			manual = true;
+<<<<<<< HEAD
 			game_init(init_card[0],init_card[1],init_card[2],init_card[3],init_card[4], manual);
+=======
+			game_init(init_card[0],init_card[1],init_card[2],init_card[3],init_card[4]);
+>>>>>>> origin/master
 			if(starter == num_players)
 			{
 				starter = 0;
@@ -116,8 +174,12 @@ int main()
 		}
 		else if(input == 67 || input == 99)//Camera
 		{
+<<<<<<< HEAD
 			manual = false;
 			game_init(0,0,0,0,0, manual);
+=======
+			game_init(0,0,0,0,0);
+>>>>>>> origin/master
 			if(starter == num_players)
 			{
 				starter = 0;

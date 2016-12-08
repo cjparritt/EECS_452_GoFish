@@ -98,12 +98,28 @@ int go_fish(int rank, int drawn_card)
 	{
 		cout << "I got what I wanted!\n";
 		cards[0][rank] += 1;
+		if (cards[0][rank] == 4)
+			{
+				 book_made(1, rank);
+				 if(isGameOver() == 1)
+				 {
+				 	return;
+				 }
+			}
 		return 1; 
 	}
 	else
 	{
 		cout << "I did not get what I wanted.\n";
 		cards[0][drawn_card] += 1;
+		if (cards[0][drawn_card] == 4)
+			{
+				 book_made(1, drawn_card);
+				 if(isGameOver() == 1)
+				 {
+				 	return;
+				 }
+			}
 		++whos_turn;
 		return 0;
 	}
@@ -115,6 +131,7 @@ void do_you_have()
 	int draw = 0;
 	int response = -1;
 	char input = ' ';
+	int misses = 0;
 	if(ai_level == 1)//DUMB !! may ask same question
 	{
 		guess_card:
@@ -158,7 +175,7 @@ void do_you_have()
 			cin >> amount;
 			cards[0][guess] += amount;
 			cards[player_guess-1][guess] = 0;
-			if (cards[1][guess] == 4)
+			if (cards[0][guess] == 4)
 			{
 				 book_made(1, guess);
 				 if(isGameOver() == 1)
@@ -170,9 +187,45 @@ void do_you_have()
 		}
 		else if(response==0)//No
 		{
+<<<<<<< HEAD
 			cout << "Please draw me a card! \nType \'Y\' when ready.";
 			cin >> input;
 			int draw = identify_new_card();
+=======
+			cout << "Please draw me a card! \n";
+			if (manual == false)
+			{
+				if(misses < 2)
+				{
+					cam_draw_1:
+					cout << "Please press Y when ready.\n";
+					cin >> input;
+					draw = identify_new_card();
+					cout << "Did I get a " << rank << "?\n";
+					if(input==89 || input==121)//yes
+					{
+						goto gf;
+					}
+					else
+					{
+						++misses;
+						goto cam_draw_1;
+					}
+				}
+				else
+				{
+					cout << "Too many errors.\nManual input required.\n"
+					goto e1;
+				}
+			}
+			else
+			{
+				e1:
+				cout << "What rank did you draw for me? Please enter 0-12 for A-K:\n";
+				cin >> draw;
+			}
+			gf:
+>>>>>>> origin/master
 			if(go_fish(guess, draw) == 1)
 			{
 				goto guess_card;
@@ -246,7 +299,7 @@ void do_you_have()
 			{
 				guess_card_n:
 				target = rand() % 13;
-				if (cards[1][target] < 1)
+				if (cards[0][target] < 1)
 				{
 					goto guess_card_n;/* make sure its valid */
 				}
@@ -288,9 +341,9 @@ void do_you_have()
 		{
 			int amount = 0;
 			cin >> amount;
-			cards[1][target] += amount;
+			cards[0][target] += amount;
 			cards[player_target][target] = 0;
-			if (cards[1][target] == 4)
+			if (cards[0][target] == 4)
 			{
 				 book_made(1, target);
 				 if(isGameOver() == 1)
@@ -302,18 +355,48 @@ void do_you_have()
 		}
 		else if(input == 78 || input == 110)
 		{
-			if (manual == true)
+			cout << "Please draw me a card! \n";
+			if (manual == false)
 			{
-				cin >> draw;
-			}
-				if(go_fish(target,draw) == 1)
+				if(misses < 2)
 				{
-					goto find_target_n; // check for book go fish.
+					cam_draw_2:
+					cout << "Please press Y when ready.\n";
+					cin >> input;
+					draw = identify_new_card();
+					cout << "Did I get a " << rank << "?\n";
+					if(input==89 || input==121)//yes
+					{
+						goto gf;
+					}
+					else
+					{
+						++misses;
+						goto cam_draw_2;
+					}
 				}
 				else
 				{
-					return;
+					cout << "Too many errors.\nManual input required.\n"
+					goto e2;
 				}
+			}
+			else
+			{
+				e2:
+				cout << "What rank did you draw for me? Please enter 0-12 for A-K:\n";
+				cin >> draw;
+			}
+			gf:
+			if(go_fish(guess, draw) == 1)
+			{
+				goto guess_card;
+			}
+			else
+			{
+				return;
+			}
+		} 
 		} 
 		else
 		{
@@ -332,6 +415,7 @@ void do_you_have()
 void game_init(int card_1_rank,int card_2_rank,int card_3_rank,int card_4_rank,
 	int card_5_rank, bool man)
 	{
+<<<<<<< HEAD
 		if (man == true)
 		{
 			int temp_hand[13] = {0};
@@ -355,6 +439,34 @@ void game_init(int card_1_rank,int card_2_rank,int card_3_rank,int card_4_rank,
 			books_made = 0;
 			getcards(cards[0]);
 			//print_ai_cards();
+=======
+		if (manual == false)
+		{
+			int temp_hand[13] = {0};
+			getcards(int temphand[0]);
+			for(int i = 0; i < 13; ++i)
+			{
+				cards[0][i] = temphand[i];
+			}
+			books_made = 0;
+			goto ai_set; I
+		}
+		else
+		{
+			for(int i = 0; i < 4; ++i)
+			{
+				for (int j = 0; j < 13; ++j)
+				{
+					cards[i][j] = 0;
+				}
+			}
+			books_made = 0;
+			cards[0][card_1_rank] += 1;
+			cards[0][card_2_rank] += 1;
+			cards[0][card_3_rank] += 1;
+			cards[0][card_4_rank] += 1;
+			cards[0][card_5_rank] += 1;
+>>>>>>> origin/master
 		}
 		ai_set:
 		cout << "How smart am I? Please select 1, 2, or 3:\n";
@@ -389,12 +501,16 @@ void  other_players_turn(bool man) //Assuming we will not provide wrong data
 	int rank = 0;
 	int asked_player;
 	int scan_miss = 0;
+<<<<<<< HEAD
 	int response;
+=======
+>>>>>>> origin/master
 	q1:
 	cout << "Who did they ask? \n";
 	cin >> asked_player;
 	if(asked_player == 1)
 	{
+<<<<<<< HEAD
 		if(man == false)
 		{
 			if(scan_miss < 2)
@@ -412,11 +528,31 @@ void  other_players_turn(bool man) //Assuming we will not provide wrong data
 					goto q4;
 				}
 				else if (response == 0)
+=======
+		if(manual == false)
+		{
+			if(scan_miss > 2)
+			{
+				scan:
+				cout << "Please show me your card.\nPress enter when ready\n";
+				system("pause");
+				rank = identify_new_card();
+				cout << "Did you ask for " << rank << "s?\n";
+				cin >> input;
+				if(input==89 || input==121)//yes
+				{
+					goto q4;
+				}
+				else
+>>>>>>> origin/master
 				{
 					++scan_miss;
 					goto scan;
 				}
+<<<<<<< HEAD
 				else cout << "Something went wrong! Oh no!" << endl;
+=======
+>>>>>>> origin/master
 			}
 			else
 			{
@@ -431,16 +567,26 @@ void  other_players_turn(bool man) //Assuming we will not provide wrong data
 		q4:
 		if(do_i_have(rank,whos_turn+1) == 1)
 		{
+<<<<<<< HEAD
 			response = yes_no_box("Yes, here you go!\nWas a book made?");
 			if(response==1)//yes
+=======
+			cout << "Yes, here you go!" << endl;
+			cout << "Was a book made?" << endl;
+			cin >> input;
+			if(input==89 || input==121)//yes
+>>>>>>> origin/master
 			{
 				//int player_num = whos_turn+1;
 				book_made(whos_turn + 1, rank);//TEMP
 			}
+<<<<<<< HEAD
 			else if (response==-1)
 			{
 				cout << "Error!\n";
 			}
+=======
+>>>>>>> origin/master
 			if(isGameOver() == 1)
 			{
 				return;
@@ -622,6 +768,10 @@ int yes_no_box(string question)
 	else return -2;
 }
 
+<<<<<<< HEAD
+=======
+/*
+>>>>>>> origin/master
 
 void getcards(int * newhand)
 {
@@ -694,6 +844,7 @@ int identify_new_card()
 return idx_max;
 }
 
+<<<<<<< HEAD
 string rank_to_str(int rank)
 {
 	string rank_str;
@@ -725,3 +876,6 @@ void print_ai_cards()
 		cout << "I have " << cards[0][i] << " of rank " << i << ".\n";
 	}
 }
+=======
+*/
+>>>>>>> origin/master

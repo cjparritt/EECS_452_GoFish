@@ -19,7 +19,10 @@ programs sunch as OpenCV and a camera to acquire information on cards in its
 hand and to be asked for cards.
 */
 
-
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/opencv.hpp>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,14 +30,24 @@ hand and to be asked for cards.
 #include <ctime>
 #include <set>
 #include <map>
-
+#include <cstring>
 #include "logic.h"
+
+#include "take_pictures.h"
+#include "extractcard.h"
+
+
+using namespace cv;
+using namespace std;
+
+
 
 int main()
 {
 	int loop_end = 0;
 	char input = ' ';
 	int init_card[5] = {0};
+	int cam_init_card[13] = {0};
 	int scan_card = 0;
 	int starter = 0;
 	srand(time(0));
@@ -45,34 +58,51 @@ int main()
 		cin >> input;
 		if(input == 77 || input == 109)//Manual
 		{
+			cout << "What cards do I have? Input A,2-9,T,J,Q,or K:" << endl;
 			for(int i = 1; i < 6; ++i)
 			{
-				cout << "Input card "<< i << " rank\n"; // asuming we put in only right inputs TODO: add period
+				cout << "Input card "<< i << " rank:\n"; // asuming we put in only right inputs
 				cin >> input;
-				if (input = 'a')
+				if (input == '1' || input == '0')
+				{
+					cin.ignore(10000,'\n');
+					cout << "Try typing T instead of 10, 1, or 0 please.\n";
+					cin >> input;
+				}
+				if (input == 'a' || input == 'A')
 				{
 					init_card[i - 1] = 0;
 				}
-				else if (input = 'j')
+				else if (input == 'j' || input == 'J')
 				{
 					init_card[i - 1] = 10;
 				}
-				else if (input = 'q')
+				else if (input == 'q' || input == 'Q')
 				{
 					init_card[i - 1] = 11;
 				}
-				else if (input = 'k')
+				else if (input == 'k' || input == 'K')
 				{
 					init_card[i - 1] = 12;
 				}
+				else if (input == 't' || input == 'T')
+				{
+					init_card[i-1] = 9;
+				}
+				else if (input == '1')
+				{
+					cin.ignore(10000,'\n');
+					cout << "Try typing T instead of 10, you fool! \n";
+					cin >> input;
+				}
 				else
 				{
-					init_card[i - 1] = input - '0';
+					init_card[i - 1] = input - '1';
 				}
 			}
 			manual = true;
-			game_init(init_card[0],init_card[1],init_card[2],init_card[3],init_card[4]);
-			if(starter == 4)
+			game_init(init_card[0],init_card[1],init_card[2],init_card[3],init_card[4], manual);
+			if(starter == num_players)
 			{
 				starter = 0;
 				whos_turn += starter;
@@ -86,8 +116,19 @@ int main()
 		}
 		else if(input == 67 || input == 99)//Camera
 		{
-			//TODO: Need to add cam stuff
-			
+			manual = false;
+			game_init(0,0,0,0,0, manual);
+			if(starter == num_players)
+			{
+				starter = 0;
+				whos_turn += starter;
+			}
+			else
+			{
+				whos_turn += starter;
+				starter++;
+			}
+			goto play;	
 		}
 		else
 		{
@@ -98,38 +139,38 @@ int main()
 		while (loop_end == 0)
 		{
 		play:
-			cout << "It is player" << whos_turn << "'s turn.\n";
+			cout << "It is player " << whos_turn + 1 << "'s turn.\n";
 			if (whos_turn == 0)
 			{
 				do_you_have(); // 1 is a placeholder for cam fun
 				if (isGameOver() == 1)
 				{
 					score_screen();
-						loop_end = 1;
-						++loop_end;
+					loop_end = 1;
+					++loop_end;
 				}
 			}
 			else
 			{
-				other_players_turn();
+				other_players_turn(manual);
 				if (isGameOver() == 1)
 				{
 					score_screen();
 					loop_end = 1;
 				}
 			}
-			if (whos_turn == 4)
+			if (whos_turn == num_players)
 				whos_turn = 0;
-				other_players_turn(); //1 is placeholder for cam fun
+				//other_players_turn(); //1 is placeholder for cam fun
 			if (isGameOver() == 1)
 			{
 				score_screen();
 				++loop_end;
 			}
-		}
-		if (whos_turn >= 4)
-		{
-			whos_turn = 0;
+			if (whos_turn >= num_players)
+			{
+				whos_turn = 0;
+			}
 		}
 	again:
 	cout << "Do you want to play again? Type Y or N.\n";
@@ -154,4 +195,5 @@ int main()
 			cout << "Invalid input!\n";
 			goto again;
 		}
+
 }

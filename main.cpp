@@ -44,59 +44,10 @@ using namespace std;
 
 int main()
 {
-take_pictures("source.jpg");
-vector<int> cards_in_hand;
-    Mat src;                                                                    //Source image
-    src = imread("source.jpg");   // Read the file
-
-
-
-
-//namedWindow("Source Image", WINDOW_NORMAL);
-//imshow("Source Image", src);
-//resizeWindow("Source Image", WINDOW_WIDTH, WINDOW_HEIGHT);
-//waitKey(0);
-
-
-
-    // Create binary image from source image
-    Mat bw_src;
-    preproccess(src, bw_src);
-
-//    namedWindow("Binary Image", WINDOW_NORMAL);
-//    imshow("Binary Image", bw_src);
-//    resizeWindow("Binary Image", WINDOW_WIDTH, WINDOW_HEIGHT);
-//    waitKey(0);
-
-//imwrite("1201_1.tif", bw_src);
-
-
-
-
-    //Find contours of cards and approximate them as rectangles
-//    vector<vector<Point> > contours;
-
-    Mat output(Size(450,630), CV_8UC3);
-    cards_in_hand = findCardContours(src, bw_src, output);
-    for(int i = 0; i < cards_in_hand.size(); i++)
-    {
-        cout << cards_in_hand[i] << "\n";
-    }
-  
-
-
-
-
-
-
-
-
-
-
-/*	
-int loop_end = 0;
+	int loop_end = 0;
 	char input = ' ';
 	int init_card[5] = {0};
+	int cam_init_card[13] = {0};
 	int scan_card = 0;
 	int starter = 0;
 	srand(time(0));
@@ -112,10 +63,10 @@ int loop_end = 0;
 			{
 				cout << "Input card "<< i << " rank:\n"; // asuming we put in only right inputs
 				cin >> input;
-				if (input == '1')
+				if (input == '1' || input == '0')
 				{
 					cin.ignore(10000,'\n');
-					cout << "Try typing T instead of 10, you fool! \n";
+					cout << "Try typing T instead of 10, 1, or 0 please.\n";
 					cin >> input;
 				}
 				if (input == 'a' || input == 'A')
@@ -150,8 +101,8 @@ int loop_end = 0;
 				}
 			}
 			manual = true;
-			game_init(init_card[0],init_card[1],init_card[2],init_card[3],init_card[4]);
-			if(starter == 4)
+			game_init(init_card[0],init_card[1],init_card[2],init_card[3],init_card[4], manual);
+			if(starter == num_players)
 			{
 				starter = 0;
 				whos_turn += starter;
@@ -165,8 +116,19 @@ int loop_end = 0;
 		}
 		else if(input == 67 || input == 99)//Camera
 		{
-			//TODO: Need to add cam stuff
-			
+			manual = false;
+			game_init(0,0,0,0,0, manual);
+			if(starter == num_players)
+			{
+				starter = 0;
+				whos_turn += starter;
+			}
+			else
+			{
+				whos_turn += starter;
+				starter++;
+			}
+			goto play;	
 		}
 		else
 		{
@@ -184,20 +146,20 @@ int loop_end = 0;
 				if (isGameOver() == 1)
 				{
 					score_screen();
-						loop_end = 1;
-						++loop_end;
+					loop_end = 1;
+					++loop_end;
 				}
 			}
 			else
 			{
-				other_players_turn();
+				other_players_turn(manual);
 				if (isGameOver() == 1)
 				{
 					score_screen();
 					loop_end = 1;
 				}
 			}
-			if (whos_turn == 4)
+			if (whos_turn == num_players)
 				whos_turn = 0;
 				//other_players_turn(); //1 is placeholder for cam fun
 			if (isGameOver() == 1)
@@ -205,10 +167,10 @@ int loop_end = 0;
 				score_screen();
 				++loop_end;
 			}
-		}
-		if (whos_turn >= 4)
-		{
-			whos_turn = 0;
+			if (whos_turn >= num_players)
+			{
+				whos_turn = 0;
+			}
 		}
 	again:
 	cout << "Do you want to play again? Type Y or N.\n";
@@ -233,5 +195,5 @@ int loop_end = 0;
 			cout << "Invalid input!\n";
 			goto again;
 		}
-*/
+
 }

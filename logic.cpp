@@ -187,11 +187,6 @@ void do_you_have()
 		}
 		else if(response==0)//No
 		{
-<<<<<<< HEAD
-			cout << "Please draw me a card! \nType \'Y\' when ready.";
-			cin >> input;
-			int draw = identify_new_card();
-=======
 			cout << "Please draw me a card! \n";
 			if (manual == false)
 			{
@@ -225,7 +220,6 @@ void do_you_have()
 				cin >> draw;
 			}
 			gf:
->>>>>>> origin/master
 			if(go_fish(guess, draw) == 1)
 			{
 				goto guess_card;
@@ -413,33 +407,8 @@ void do_you_have()
 }
 
 void game_init(int card_1_rank,int card_2_rank,int card_3_rank,int card_4_rank,
-	int card_5_rank, bool man)
+	int card_5_rank)
 	{
-<<<<<<< HEAD
-		if (man == true)
-		{
-			int temp_hand[13] = {0};
-			getcards(temp_hand);
-			for(int i = 0; i < 13; ++i)
-			{
-				cards[0][i] = temp_hand[i];
-			}
-			books_made = 0;
-			goto ai_set;
-		}
-		else
-		{
-			for(int i = 0; i < 4; ++i)
-			{
-				for (int j = 0; j < 13; ++j)
-				{
-					cards[i][j] = 0;
-				}
-			}
-			books_made = 0;
-			getcards(cards[0]);
-			//print_ai_cards();
-=======
 		if (manual == false)
 		{
 			int temp_hand[13] = {0};
@@ -466,7 +435,6 @@ void game_init(int card_1_rank,int card_2_rank,int card_3_rank,int card_4_rank,
 			cards[0][card_3_rank] += 1;
 			cards[0][card_4_rank] += 1;
 			cards[0][card_5_rank] += 1;
->>>>>>> origin/master
 		}
 		ai_set:
 		cout << "How smart am I? Please select 1, 2, or 3:\n";
@@ -494,65 +462,39 @@ void game_init(int card_1_rank,int card_2_rank,int card_3_rank,int card_4_rank,
 		return;
 	}
 
-void  other_players_turn(bool man) //Assuming we will not provide wrong data
+void  other_players_turn() //Assuming we will not provide wrong data
 {
 	char input = ' ';
 	int amount = 0;
 	int rank = 0;
 	int asked_player;
 	int scan_miss = 0;
-<<<<<<< HEAD
 	int response;
-=======
->>>>>>> origin/master
 	q1:
 	cout << "Who did they ask? \n";
 	cin >> asked_player;
 	if(asked_player == 1)
 	{
-<<<<<<< HEAD
-		if(man == false)
+		if(manual == false)
 		{
+			scan:
 			if(scan_miss < 2)
 			{
-				scan:
+				
 				cout << "Please show me your card.\nAre you ready?\nPress \'Y\' when ready\n";
 				cin >> input;
 				rank = identify_new_card();
-				
 				response = yes_no_box("Did you ask for "+rank_to_str(rank)+"s?");
-				//cout << "Did you ask for " << rank_to_str(rank) << "s?\n";
-				//cin >> input;
 				if(response == 1)//yes
 				{
 					goto q4;
 				}
 				else if (response == 0)
-=======
-		if(manual == false)
-		{
-			if(scan_miss > 2)
-			{
-				scan:
-				cout << "Please show me your card.\nPress enter when ready\n";
-				system("pause");
-				rank = identify_new_card();
-				cout << "Did you ask for " << rank << "s?\n";
-				cin >> input;
-				if(input==89 || input==121)//yes
-				{
-					goto q4;
-				}
-				else
->>>>>>> origin/master
 				{
 					++scan_miss;
 					goto scan;
 				}
-<<<<<<< HEAD
-				else cout << "Something went wrong! Oh no!" << endl;
-=======
->>>>>>> origin/master
+				else cout << "Something went wrong! Oh no\n!";
 			}
 			else
 			{
@@ -567,26 +509,15 @@ void  other_players_turn(bool man) //Assuming we will not provide wrong data
 		q4:
 		if(do_i_have(rank,whos_turn+1) == 1)
 		{
-<<<<<<< HEAD
 			response = yes_no_box("Yes, here you go!\nWas a book made?");
 			if(response==1)//yes
-=======
-			cout << "Yes, here you go!" << endl;
-			cout << "Was a book made?" << endl;
-			cin >> input;
-			if(input==89 || input==121)//yes
->>>>>>> origin/master
 			{
-				//int player_num = whos_turn+1;
-				book_made(whos_turn + 1, rank);//TEMP
+				book_made(whos_turn + 1, rank);
 			}
-<<<<<<< HEAD
 			else if (response==-1)
 			{
 				cout << "Error!\n";
 			}
-=======
->>>>>>> origin/master
 			if(isGameOver() == 1)
 			{
 				return;
@@ -768,11 +699,6 @@ int yes_no_box(string question)
 	else return -2;
 }
 
-<<<<<<< HEAD
-=======
-/*
->>>>>>> origin/master
-
 void getcards(int * newhand)
 {
 	vector<int> cards_in_hand;
@@ -844,7 +770,7 @@ int identify_new_card()
 return idx_max;
 }
 
-<<<<<<< HEAD
+
 string rank_to_str(int rank)
 {
 	string rank_str;
@@ -876,6 +802,3 @@ void print_ai_cards()
 		cout << "I have " << cards[0][i] << " of rank " << i << ".\n";
 	}
 }
-=======
-*/
->>>>>>> origin/master

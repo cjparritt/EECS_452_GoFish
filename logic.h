@@ -32,15 +32,6 @@ functions, required includes, and predefined varables.
 #include <string>
 #include <fstream>
 #include <vector>
-<<<<<<< HEAD
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/opencv.hpp>
-
-#include "take_pictures.h"
-#include "extractcard.h"
-=======
 //#include <opencv2/core/core.hpp>
 //#include <opencv2/highgui/highgui.hpp>
 //#include <opencv2/imgproc/imgproc.hpp>
@@ -48,7 +39,6 @@ functions, required includes, and predefined varables.
 
 //#include "take_pictures.h"
 //#include "extractcard.h"
->>>>>>> origin/master
 
 extern int scores[4];
 extern int ai_level;
@@ -100,7 +90,7 @@ M: cards array
 E: askes for a card based on the card array
 */
 
-void other_players_turn(bool man);
+void other_players_turn();
 /*
 R: N/A
 M: cards array books made whos turn
@@ -108,7 +98,7 @@ E: gathers data from operator during other players turns
 */
 
 void game_init(int card_1_rank,int card_2_rank,int card_3_rank,int card_4_rank,
-	int card_5_rank, bool man);
+	int card_5_rank);
 /*
 R: the five cards drawn
 M: card array and AI level
@@ -127,10 +117,7 @@ int yes_no_box(string question);
 // Modifies:
 // Explain: A dialog box will pop up displaying the question where the user can select yes or no. Function returns 1 if user selects yes, 0 if user selects no,-1 if no selection is made, and -2 if there is an error.
 
-<<<<<<< HEAD
-=======
 /*
->>>>>>> origin/master
 
 void getcards(int *newhand);
 // Requires: Caller supplies a pointer to an array of length 13 to hold the
@@ -155,16 +142,13 @@ int identify_new_card();
 // Modifies: N/A
 // Effects: Checks what card has been added to the computer's hand and returns the rank of that card.
 
-<<<<<<< HEAD
 string rank_to_str(int rank);
 // Requires: A rank 0-12.
 //Modifies: N/A
 //Effects: Returns a string with A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, or K depending on the value of rank.
  
 void print_ai_cards();
-=======
 */
->>>>>>> origin/master
 
 #endif
 
